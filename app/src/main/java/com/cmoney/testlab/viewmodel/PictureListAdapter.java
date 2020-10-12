@@ -30,14 +30,15 @@ public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final PictureViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final PictureViewHolder holder, int position) {
         // TODO: 2020/10/12 完成binding
-        holder.bindWith(pictureList.get(position));
+        final SinglePicture picture = pictureList.get(position);
+        holder.bindWith(picture);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ActivityItemDetail.class);
-                intent.putExtra(ActivityItemDetail.ARG_ID, position);
+                intent.putExtra(ActivityItemDetail.ARG_ID, picture.getId());
                 view.getContext().startActivity(intent);
             }
         });
