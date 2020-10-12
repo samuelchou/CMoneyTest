@@ -46,7 +46,7 @@ public class SinglePictureViewModel extends AndroidViewModel {
         if (url == null) return;
         PictureDownloader downloader = new PictureDownloader(view.getContext());
         ImageLoader imageLoader = downloader.getImageLoader();
-        ImageLoader.ImageListener listener = ImageLoader.getImageListener(view, R.drawable.ic_launcher_background, R.drawable.ic_launcher_foreground);
+        ImageLoader.ImageListener listener = ImageLoader.getImageListener(view, 0, R.drawable.ic_launcher_foreground);
 //        imageLoader.get(url, listener); // 原始網址壞去，使用新方法
         imageLoader.get(PictureDownloader.getPicAlternativeUrl(url), listener);
     }

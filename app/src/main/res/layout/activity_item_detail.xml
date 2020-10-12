@@ -30,17 +30,17 @@
 
         <ImageView
             android:id="@+id/itemImage"
+            imageUrl="@{viewModel.picture.url}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/des_picture_thumb"
             android:scaleType="centerCrop"
             android:visibility="@{viewModel.isLoading ? View.INVISIBLE : View.VISIBLE}"
-            imageUrl="@{viewModel.picture.url}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            tools:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/itemTitle"
@@ -59,7 +59,10 @@
             android:id="@+id/itemContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             android:text="@{viewModel.picture.content}"
+            android:textAlignment="center"
             android:visibility="@{viewModel.isLoading ? View.INVISIBLE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
