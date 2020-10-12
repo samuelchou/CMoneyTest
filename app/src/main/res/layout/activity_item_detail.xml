@@ -35,6 +35,7 @@
             android:contentDescription="@string/des_picture_thumb"
             android:scaleType="centerCrop"
             android:visibility="@{viewModel.isLoading ? View.INVISIBLE : View.VISIBLE}"
+            imageUrl="@{viewModel.picture.url}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

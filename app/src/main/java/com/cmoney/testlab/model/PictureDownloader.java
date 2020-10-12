@@ -3,6 +3,7 @@ package com.cmoney.testlab.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.collection.LruCache;
@@ -24,6 +25,7 @@ import java.util.List;
 
 public class PictureDownloader {
     private static final String BASE_URL = "https://jsonplaceholder.typicode.com/photos";
+    private static final String TAG = "PictureDownloader";
 
     private RequestQueue requestQueue;
     private BitmapCache bitmapCache = new BitmapCache();
@@ -135,7 +137,10 @@ public class PictureDownloader {
     public static String getPicAlternativeUrl(String originUrl) {
         // origin: https://via.placeholder.com/150/92c952
         // target: https://ipsumimage.appspot.com/150,92c952
+        Log.d(TAG, "getPicAlternativeUrl: origin was " + originUrl);
         String endUrl = originUrl.split("m/")[1].replace("/",",");
-        return "https://ipsumimage.appspot.com/" + endUrl;
+        String alterUrl = "https://ipsumimage.appspot.com/" + endUrl;
+        Log.d(TAG, "getPicAlternativeUrl: alter was " + alterUrl);
+        return alterUrl;
     }
 }
