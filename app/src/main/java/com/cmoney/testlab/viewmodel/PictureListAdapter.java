@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cmoney.testlab.R;
+import com.cmoney.testlab.databinding.ItemPictureWithTitleBinding;
 import com.cmoney.testlab.model.SinglePicture;
 import com.cmoney.testlab.view.ActivityItemDetail;
 
@@ -25,12 +25,14 @@ public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.
     @Override
     public PictureViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        return new PictureViewHolder(layoutInflater.inflate(R.layout.item_picture_with_title, parent, false));
+        ItemPictureWithTitleBinding binding = ItemPictureWithTitleBinding.inflate(layoutInflater, parent, false);
+        return new PictureViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final PictureViewHolder holder, final int position) {
         // TODO: 2020/10/12 完成binding
+        holder.bindWith(pictureList.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,9 +55,17 @@ public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.
     }
 
     static class PictureViewHolder extends RecyclerView.ViewHolder {
+        private ItemPictureWithTitleBinding binding;
 
-        public PictureViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public PictureViewHolder(@NonNull ItemPictureWithTitleBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bindWith(SinglePicture picture) {
+            binding.setItemModel(picture);
+            binding.executePendingBindings();
+            // 即刻更新資料到Layout上。參見： https://stackoverflow.com/questions/53043412/android-why-use-executependingbindings-in-recyclerview
         }
     }
 }
