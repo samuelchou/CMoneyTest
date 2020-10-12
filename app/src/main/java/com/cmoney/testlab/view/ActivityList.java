@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +24,7 @@ public class ActivityList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new GalleryViewModel();
+        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(GalleryViewModel.class);
 
         ActivityListBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_list);
         binding.setListModel(viewModel);

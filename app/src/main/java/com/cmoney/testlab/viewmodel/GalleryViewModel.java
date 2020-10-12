@@ -1,6 +1,10 @@
 package com.cmoney.testlab.viewmodel;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
 import androidx.databinding.ObservableBoolean;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.cmoney.testlab.model.PictureDownloader;
@@ -8,15 +12,16 @@ import com.cmoney.testlab.model.SinglePicture;
 
 import java.util.List;
 
-public class GalleryViewModel {
+public class GalleryViewModel extends AndroidViewModel {
     public final ObservableBoolean isLoading = new ObservableBoolean(false);
 
     private final MutableLiveData<List<SinglePicture>> pictureList = new MutableLiveData<>();
 
     private PictureDownloader pictureDownloader;
 
-    public GalleryViewModel() {
-        pictureDownloader = new PictureDownloader();
+    public GalleryViewModel(@NonNull Application application) {
+        super(application);
+        pictureDownloader = new PictureDownloader(application);
     }
 
     public MutableLiveData<List<SinglePicture>> getPictureList() {
