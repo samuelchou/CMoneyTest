@@ -17,6 +17,8 @@ import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
@@ -63,6 +65,33 @@ public class VolleyNetTest {
         assertEquals("natus doloribus necessitatibus ipsa", picture.getContent());
         assertEquals("https://via.placeholder.com/600/9c184f", picture.getUrl());
         assertEquals("https://via.placeholder.com/150/9c184f", picture.getThumbUrl());
+    }
+
+
+
+    @Test
+    public void TestGsonArray() {
+        String jsonString = "[\n" +
+                "  {\n" +
+                "    \"albumId\": 1,\n" +
+                "    \"id\": 1,\n" +
+                "    \"title\": \"accusamus beatae ad facilis cum similique qui sunt\",\n" +
+                "    \"url\": \"https://via.placeholder.com/600/92c952\",\n" +
+                "    \"thumbnailUrl\": \"https://via.placeholder.com/150/92c952\"\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"albumId\": 1,\n" +
+                "    \"id\": 2,\n" +
+                "    \"title\": \"reprehenderit est deserunt velit ipsam\",\n" +
+                "    \"url\": \"https://via.placeholder.com/600/771796\",\n" +
+                "    \"thumbnailUrl\": \"https://via.placeholder.com/150/771796\"\n" +
+                "  }" +
+                "]";
+        SinglePicture[] pictures = new Gson().fromJson(jsonString, SinglePicture[].class);
+        assertEquals(2, pictures[1].getId());
+        assertEquals("accusamus beatae ad facilis cum similique qui sunt", pictures[0].getContent());
+        assertEquals("https://via.placeholder.com/600/771796", pictures[1].getUrl());
+        assertEquals("https://via.placeholder.com/150/92c952", pictures[0].getThumbUrl());
     }
 
 }
