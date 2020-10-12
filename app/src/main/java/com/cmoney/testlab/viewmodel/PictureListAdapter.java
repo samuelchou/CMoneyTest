@@ -31,7 +31,6 @@ public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final PictureViewHolder holder, int position) {
-        // TODO: 2020/10/12 完成binding
         final SinglePicture picture = pictureList.get(position);
         holder.bindWith(picture);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
