@@ -8,6 +8,10 @@
         <variable
             name="itemModel"
             type="com.cmoney.testlab.model.SinglePicture" />
+
+        <variable
+            name="viewModel"
+            type="com.cmoney.testlab.viewmodel.SinglePictureViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +20,7 @@
 
         <ImageView
             android:id="@+id/itemImage"
+            imageUrl="@{itemModel.thumbUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
@@ -25,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            tools:srcCompat="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/itemTitle"
