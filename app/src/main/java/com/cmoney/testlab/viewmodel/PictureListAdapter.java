@@ -1,5 +1,6 @@
 package com.cmoney.testlab.viewmodel;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cmoney.testlab.R;
+import com.cmoney.testlab.view.ActivityItemDetail;
 
 public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.PictureViewHolder> {
 
@@ -20,8 +22,16 @@ public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PictureViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PictureViewHolder holder, final int position) {
         // TODO: 2020/10/12 完成binding
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ActivityItemDetail.class);
+                intent.putExtra(ActivityItemDetail.ARG_ID, position);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
