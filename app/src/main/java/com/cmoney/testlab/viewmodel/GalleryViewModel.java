@@ -16,6 +16,10 @@ public class GalleryViewModel {
         pictureDownloader = new PictureDownloader();
     }
 
+    public MutableLiveData<List<SinglePicture>> getPictureList() {
+        return pictureList;
+    }
+
     public void FetchGallery() {
         pictureDownloader.RequestPictureGallery(new PictureDownloader.OnGalleryFinishCallback() {
             @Override

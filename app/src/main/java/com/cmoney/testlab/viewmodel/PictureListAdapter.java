@@ -9,10 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cmoney.testlab.R;
+import com.cmoney.testlab.model.SinglePicture;
 import com.cmoney.testlab.view.ActivityItemDetail;
 
-public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.PictureViewHolder> {
+import java.util.List;
 
+public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.PictureViewHolder> {
+    private List<SinglePicture> pictureList;
+
+    public PictureListAdapter(List<SinglePicture> list) {
+        pictureList = list;
+    }
 
     @NonNull
     @Override
@@ -36,7 +43,13 @@ public class PictureListAdapter extends RecyclerView.Adapter<PictureListAdapter.
 
     @Override
     public int getItemCount() {
-        return 30;
+        return pictureList.size();
+    }
+
+    public void updateList(List<SinglePicture> pictures) {
+        pictureList.clear();
+        pictureList.addAll(pictures);
+        notifyDataSetChanged();
     }
 
     static class PictureViewHolder extends RecyclerView.ViewHolder {

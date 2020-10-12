@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cmoney.testlab.R;
 import com.cmoney.testlab.viewmodel.PictureListAdapter;
 
+import java.util.ArrayList;
+
 public class ActivityList extends AppCompatActivity {
 
     @Override
@@ -23,7 +25,7 @@ public class ActivityList extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
-        PictureListAdapter adapter = new PictureListAdapter();
+        final PictureListAdapter adapter = new PictureListAdapter(new ArrayList<SinglePicture>());
         recyclerView.setAdapter(adapter);
 
     }
