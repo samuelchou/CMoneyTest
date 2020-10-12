@@ -137,10 +137,15 @@ public class PictureDownloader {
     public static String getPicAlternativeUrl(String originUrl) {
         // origin: https://via.placeholder.com/150/92c952
         // target: https://ipsumimage.appspot.com/150,92c952
-        Log.d(TAG, "getPicAlternativeUrl: origin was " + originUrl);
-        String endUrl = originUrl.split("m/")[1].replace("/",",");
+        // Log.d(TAG, "getPicAlternativeUrl: origin was " + originUrl);
+        String endUrl = originUrl.split("m/")[1].replace("/", ",");
+        String brokenAttr = "150/e9b68";
+        if (endUrl.length() <= brokenAttr.length()) {
+            // 150/e9b68 -> 150,e9b608
+            endUrl = endUrl.substring(0, endUrl.length() - 1) + "0" + endUrl.substring(endUrl.length() - 1);
+        }
         String alterUrl = "https://ipsumimage.appspot.com/" + endUrl;
-        Log.d(TAG, "getPicAlternativeUrl: alter was " + alterUrl);
+        // Log.d(TAG, "getPicAlternativeUrl: alter was " + alterUrl);
         return alterUrl;
     }
 }
