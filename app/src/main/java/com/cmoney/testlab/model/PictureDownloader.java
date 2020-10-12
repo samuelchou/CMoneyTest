@@ -15,7 +15,7 @@ public class PictureDownloader {
     }
 
     public interface OnFinishCallback {
-        void onSuccess(SinglePicture picture);
+        void onSuccess(SinglePicture result);
 
         void onFail(String msg);
     }

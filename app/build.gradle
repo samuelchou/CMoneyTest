@@ -19,6 +19,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Data Binding 專門項。
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
