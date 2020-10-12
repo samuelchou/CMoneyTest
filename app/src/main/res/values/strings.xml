@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">testlab</string>
+    <string name="title_launcher">JSON Place Holder</string>
+    <string name="action_request">Request API</string>
 </resources>
