@@ -2,10 +2,15 @@ package com.cmoney.testlab.model;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+
+import androidx.annotation.NonNull;
+import androidx.collection.LruCache;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -21,6 +26,7 @@ public class PictureDownloader {
     private static final String BASE_URL = "https://jsonplaceholder.typicode.com/photos";
 
     private RequestQueue requestQueue;
+    private BitmapCache bitmapCache = new BitmapCache();
 
     public PictureDownloader(RequestQueue requestQueue) {
         this.requestQueue = requestQueue;
@@ -53,6 +59,10 @@ public class PictureDownloader {
                     }
                 });
         requestQueue.add(objectRequest);
+    }
+
+    public ImageLoader getImageLoader() {
+        return new ImageLoader(requestQueue, bitmapCache);
     }
 
     public void RequestPictureGallery(final OnGalleryFinishCallback callback) {
@@ -94,5 +104,38 @@ public class PictureDownloader {
         void onSuccess(List<SinglePicture> result);
 
         void onFail(String msg);
+    }
+
+    public static class BitmapCache implements ImageLoader.ImageCache {
+
+        private LruCache<String, Bitmap> mCache;
+
+        public BitmapCache() {
+            int maxSize = 10 * 1024 * 1024;
+            mCache = new LruCache<String, Bitmap>(maxSize) {
+                @Override
+                protected int sizeOf(@NonNull String key, @NonNull Bitmap bitmap) {
+                    return bitmap.getRowBytes() * bitmap.getHeight();
+                }
+            };
+        }
+
+        @Override
+        public Bitmap getBitmap(String url) {
+            return mCache.get(url);
+        }
+
+        @Override
+        public void putBitmap(String url, Bitmap bitmap) {
+            mCache.put(url, bitmap);
+        }
+
+    }
+
+    public static String getPicAlternativeUrl(String originUrl) {
+        // origin: https://via.placeholder.com/150/92c952
+        // target: https://ipsumimage.appspot.com/150,92c952
+        String endUrl = originUrl.split("m/")[1].replace("/",",");
+        return "https://ipsumimage.appspot.com/" + endUrl;
     }
 }
