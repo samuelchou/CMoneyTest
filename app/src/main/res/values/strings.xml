@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">testlab</string>
+
     <string name="title_launcher">JSON Place Holder</string>
     <string name="action_request">Request API</string>
+
     <string name="des_picture_thumb">Picture Thumb</string>
+
+    <string name="msg_fail_to_load">載入失敗:(</string>
 </resources>
